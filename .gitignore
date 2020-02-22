@@ -1,3 +1,4 @@
 applicationContext.xml
 *.class
 *.jar
+MySQLConnectionTest.java
