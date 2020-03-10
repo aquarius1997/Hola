@@ -3,3 +3,4 @@ applicationContext.xml
 *.jar
 MySQLConnectionTest.java
 *.properties
+.idea/
