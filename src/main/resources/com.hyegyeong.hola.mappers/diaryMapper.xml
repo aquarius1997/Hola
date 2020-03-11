@@ -20,47 +20,47 @@
 
 
     <insert id="insertDiary" useGeneratedKeys="true" keyProperty="diaryId">
-        INSERT INTO DIARY_MST (
-                    TITLE
-                    ,CONTENT
-                    ,MEMBER_ID
-                    ,MOOD_CODE
-                    ,OPN_FLAG
-                    )
-             VALUES (
-                    ,#{title}
-                    ,#{content}
-                    ,#{memberId}
-                    ,#{moodCode}
-                    ,#{opnFlag}
-             )
+    INSERT INTO DIARY_MST (
+                TITLE
+                ,CONTENT
+                ,MEMBER_ID
+                ,MOOD_CODE
+                ,OPN_FLAG
+                )
+         VALUES (
+                ,#{title}
+                ,#{content}
+                ,#{memberId}
+                ,#{moodCode}
+                ,#{opnFlag}
+         )
     </insert>
 
 <!--    추후 where절 삽입해야함-->
     <select id="selectDiaryList" resultMap="diaryResult">
-        SELECT *
-          FROM DIARY_MST
+    SELECT *
+      FROM DIARY_MST
     </select>
 
     <select id="selectDiary" resultMap="diaryResult">
-        SELECT *
-          FROM DIARY_MST
-         WHERE DIARY_ID = #{diaryId}
+    SELECT *
+      FROM DIARY_MST
+     WHERE DIARY_ID = #{diaryId}
     </select>
 
     <update id="updateDiary">
-        UPDATE DIARYS_MST
-           SET TITLE = #{title}
-               ,CONTENT = #{content}
-               ,MOOD_CODE = #{moodCode}
-               ,OPN_FLAG = #{opnFlag}
-         WHERE DIARY_ID = #{diaryId}
+    UPDATE DIARYS_MST
+       SET TITLE = #{title}
+           ,CONTENT = #{content}
+           ,MOOD_CODE = #{moodCode}
+           ,OPN_FLAG = #{opnFlag}
+     WHERE DIARY_ID = #{diaryId}
     </update>
 
     <delete id="deleteDiary">
-        UPDATE DIARYS_MST
-           SET DEL_FLAG = 'Y'
-         WHERE DIARY_ID = #{diaryId}
+    UPDATE DIARYS_MST
+       SET DEL_FLAG = 'Y'
+     WHERE DIARY_ID = #{diaryId}
     </delete>
 
 </mapper>
