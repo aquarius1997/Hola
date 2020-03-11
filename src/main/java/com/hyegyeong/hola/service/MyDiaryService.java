@@ -1,14 +1,19 @@
 package com.hyegyeong.hola.service;
 
 import com.hyegyeong.hola.dto.DiaryDTO;
+import com.hyegyeong.hola.exception.BusinessException;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
+//이후 트랜잭션 설정하기
 public interface MyDiaryService {
+
     /**
      * 새로운 다이어리를 추가한다
      * @param diaryDTO 추가하려는 내용을 담고있는 다이어리 객체
      */
-    public void insertDiay(DiaryDTO diaryDTO);
+    public void insertDiary(DiaryDTO diaryDTO);
 
     /**
      * 작성한 모든 다이어리 객체를 가져온다 (추후 수정 필요. 멤버 아이디가 변수로 들어가야함)
@@ -21,7 +26,7 @@ public interface MyDiaryService {
      * @param diaryId 읽어려는 다이어리의 아이디
      * @return 읽어온 다이어리 객체
      */
-    public DiaryDTO selectDiary(Long diaryId);
+    public DiaryDTO selectDiary(Long diaryId) throws BusinessException;
 
     /**
      * 다이어리 내용을 수정한다

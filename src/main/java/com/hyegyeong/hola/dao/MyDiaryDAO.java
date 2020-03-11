@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
+import java.sql.SQLException;
 import java.util.List;
 
 @Component
@@ -42,7 +43,7 @@ public class MyDiaryDAO {
      * @param diaryId 읽으려는 다이어리의 아이디
      * @return 읽어온 다이어리 객체
      */
-    public DiaryDTO selectDiary(Long diaryId) throws Exception {
+    public DiaryDTO selectDiary(Long diaryId) throws BusinessException {
         DiaryDTO diaryDTO = sqlSession.selectOne(NAMESPACE + ".selectDiary", diaryId);
         return diaryDTO;
     }
@@ -64,5 +65,6 @@ public class MyDiaryDAO {
     public int deleteDiary(Long diaryId) {
         return sqlSession.delete(NAMESPACE + ".deleteDiary", diaryId);
     }
+
 
 }
