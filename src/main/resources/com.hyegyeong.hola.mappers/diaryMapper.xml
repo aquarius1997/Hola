@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hyegyeong.hola.mappers.diaryMapper">
+
+    <resultMap id="diaryResult" type="com.hyegyeong.hola.dto.DiaryDTO">
+        <result column="DIARY_ID" property="diaryId"/>
+        <result column="TITLE" property="title"/>
+        <result column="CONTENT" property="content"/>
+        <result column="MEMBER_ID" property="memberId"/>
+        <result column="MOOD_CODE" property="moodCode"/>
+        <result column="HEART" property="heard"/>
+        <result column="OPN_FLAG" property="opnFlag"/>
+        <result column="REG_DATE" property="regDate"/>
+        <result column="UPD_DATE" property="updDate"/>
+        <result column="DEL_FLAG" property="delFlag"/>
+    </resultMap>
+
+
+    <insert id="insertDiary" useGeneratedKeys="true" keyProperty="diaryId">
+        INSERT INTO DIARY_MST (
+                    TITLE
+                    ,CONTENT
+                    ,MEMBER_ID
+                    ,MOOD_CODE
+                    ,OPN_FLAG
+                    )
+             VALUES (
+                    ,#{title}
+                    ,#{content}
+                    ,#{memberId}
+                    ,#{moodCode}
+                    ,#{opnFlag}
+             )
+    </insert>
+
+<!--    추후 where절 삽입해야함-->
+    <select id="selectDiaryList" resultMap="diaryResult">
+        SELECT *
+          FROM DIARY_MST
+    </select>
+
+    <select id="selectDiary" resultMap="diaryResult">
+        SELECT *
+          FROM DIARY_MST
+         WHERE DIARY_ID = #{diaryId}
+    </select>
+
+    <update id="updateDiary">
+        UPDATE DIARYS_MST
+           SET TITLE = #{title}
+               ,CONTENT = #{content}
+               ,MOOD_CODE = #{moodCode}
+               ,OPN_FLAG = #{opnFlag}
+         WHERE DIARY_ID = #{diaryId}
+    </update>
+
+    <delete id="deleteDiary">
+        UPDATE DIARYS_MST
+           SET DEL_FLAG = 'Y'
+         WHERE DIARY_ID = #{diaryId}
+    </delete>
+
+</mapper>
