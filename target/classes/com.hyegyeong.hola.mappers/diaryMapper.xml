@@ -6,7 +6,7 @@
 <mapper namespace="com.hyegyeong.hola.mappers.diaryMapper">
 
     <resultMap id="diaryResult" type="com.hyegyeong.hola.dto.DiaryDTO">
-        <result column="DIARY_ID" property="diaryId"/>
+        <id column="DIARY_ID" property="diaryId"/>
         <result column="TITLE" property="title"/>
         <result column="CONTENT" property="content"/>
         <result column="MEMBER_ID" property="memberId"/>

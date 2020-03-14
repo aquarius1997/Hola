@@ -1,16 +1,24 @@
 package com.hyegyeong.hola.controllerTest;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hyegyeong.hola.dto.DiaryDTO;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -28,6 +36,41 @@ public class MyDiaryControllerTest {
     public void setup() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
         logger.info("End setup...");
+    }
+
+    /**
+     * 사용자 ID가 1인 유저가 다이어리를 저장하는 요청을 제대로 받아 처리하는지 테스트
+     * @throws Exception
+     */
+    @Test
+    public void testSaveDiary() throws Exception {
+        DiaryDTO diaryDTO = new DiaryDTO();
+        diaryDTO.setTitle("Controller Unit Test");
+        diaryDTO.setContent("controller test content");
+        diaryDTO.setMemberId(1);
+
+        //jackson의 ObjectMapper를 이용해 객체를 json으로 변환
+        ObjectMapper objectMapper = new ObjectMapper();
+        String json = objectMapper.writeValueAsString(diaryDTO);
+
+        mockMvc.perform(MockMvcRequestBuilders
+                .post("/my-diaries/diary")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json)
+                .characterEncoding("utf-8"))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    /**
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testGetDiaryList() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/my-diaries/{memberId}", 1))
+                .andDo(print())
+                .andExpect(status().isOk());
     }
 
 

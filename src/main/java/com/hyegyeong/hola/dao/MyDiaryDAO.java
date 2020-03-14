@@ -2,15 +2,12 @@ package com.hyegyeong.hola.dao;
 
 import com.hyegyeong.hola.dto.DiaryDTO;
 import com.hyegyeong.hola.exception.BusinessException;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Component;
-
 import javax.inject.Inject;
 import java.util.List;
 
 @Component
-@Mapper
 public class MyDiaryDAO {
 
     @Inject
@@ -65,6 +62,5 @@ public class MyDiaryDAO {
     public int deleteDiary(int diaryId) {
         return sqlSession.delete(NAMESPACE + ".deleteDiary", diaryId);
     }
-
 
 }
