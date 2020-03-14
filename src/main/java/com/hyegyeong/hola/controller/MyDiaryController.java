@@ -1,29 +1,29 @@
 package com.hyegyeong.hola.controller;
 
+import com.hyegyeong.hola.dto.DiaryDTO;
 import com.hyegyeong.hola.exception.BusinessException;
 import com.hyegyeong.hola.service.MyDiaryService;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
+@AllArgsConstructor
+@RequestMapping("/my-diaries")
 public class MyDiaryController {
 
     private MyDiaryService myDiaryService;
 
-    /* try catch 말고 어노테이션으로 처리하기
-    @PostMapping("/m")
-    public void saveDiary() {
+    //Create My Trip Diary
 
-        try {
-            myDiaryService.insertDiay();
-        } catch(BusinessException e){
-            String msg = e.getMessage();
-            System.out.println(msg);
-            System.out.println();
-            e.printStackTrace();;
-        }
+    /**
+     * Create new trip diary
+     */
+    @PostMapping("/diary")
+    public void saveDiary(@RequestBody DiaryDTO diaryDTO) throws BusinessException{
+        myDiaryService.insertDiary(diaryDTO);
     }
-    */
+
+
 }

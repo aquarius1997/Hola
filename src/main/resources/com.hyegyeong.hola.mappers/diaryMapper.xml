@@ -11,7 +11,7 @@
         <result column="CONTENT" property="content"/>
         <result column="MEMBER_ID" property="memberId"/>
         <result column="MOOD_CODE" property="moodCode"/>
-        <result column="HEART" property="heard"/>
+        <result column="HEART" property="heart"/>
         <result column="OPN_FLAG" property="opnFlag"/>
         <result column="REG_DATE" property="regDate"/>
         <result column="UPD_DATE" property="updDate"/>
@@ -20,7 +20,7 @@
 
 
     <insert id="insertDiary" useGeneratedKeys="true" keyProperty="diaryId">
-    INSERT INTO DIARY_MST (
+    INSERT INTO DIARYS_MST (
                 TITLE
                 ,CONTENT
                 ,MEMBER_ID
@@ -28,7 +28,7 @@
                 ,OPN_FLAG
                 )
          VALUES (
-                ,#{title}
+                #{title}
                 ,#{content}
                 ,#{memberId}
                 ,#{moodCode}
@@ -36,16 +36,18 @@
          )
     </insert>
 
-<!--    추후 where절 삽입해야함-->
     <select id="selectDiaryList" resultMap="diaryResult">
     SELECT *
-      FROM DIARY_MST
+      FROM DIARYS_MST
+     WHERE MEMBER_ID = #{memberId}
+       AND DEL_FLAG = 'N'
     </select>
 
     <select id="selectDiary" resultMap="diaryResult">
     SELECT *
-      FROM DIARY_MST
+      FROM DIARYS_MST
      WHERE DIARY_ID = #{diaryId}
+       AND DEL_FLAG = 'N'
     </select>
 
     <update id="updateDiary">
@@ -55,6 +57,7 @@
            ,MOOD_CODE = #{moodCode}
            ,OPN_FLAG = #{opnFlag}
      WHERE DIARY_ID = #{diaryId}
+       AND DEL_FLAG = 'N'
     </update>
 
     <delete id="deleteDiary">

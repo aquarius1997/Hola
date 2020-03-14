@@ -2,7 +2,6 @@ package com.hyegyeong.hola.service;
 
 import com.hyegyeong.hola.dto.DiaryDTO;
 import com.hyegyeong.hola.exception.BusinessException;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -13,32 +12,33 @@ public interface MyDiaryService {
      * 새로운 다이어리를 추가한다
      * @param diaryDTO 추가하려는 내용을 담고있는 다이어리 객체
      */
-    public void insertDiary(DiaryDTO diaryDTO);
+    public void insertDiary(DiaryDTO diaryDTO) throws BusinessException;
 
     /**
-     * 작성한 모든 다이어리 객체를 가져온다 (추후 수정 필요. 멤버 아이디가 변수로 들어가야함)
-     * @return 작성한 모든 다이어리 객체
+     * 특정 회원이 작성한 모든 다이어리 객체를 가져온다
+     * @param memberId 회원 아이
+     * @return 특정 회원이 작성한 모든 다이어리 객체
      */
-    public List<DiaryDTO> selectDiaryList();
+    public List<DiaryDTO> selectDiaryList(int memberId);
 
     /**
      * 특정 다이어리 하나를 읽는다
      * @param diaryId 읽어려는 다이어리의 아이디
      * @return 읽어온 다이어리 객체
      */
-    public DiaryDTO selectDiary(Long diaryId) throws BusinessException;
+    public DiaryDTO selectDiary(int diaryId) throws BusinessException;
 
     /**
      * 다이어리 내용을 수정한다
      * @param diaryDTO 수정하려는 다이어리의 아이디
      * @return 수정한 다이어리 객체
      */
-    public DiaryDTO updateDiary(DiaryDTO diaryDTO);
+    public DiaryDTO updateDiary(DiaryDTO diaryDTO) throws BusinessException;
 
     /**
      * 다이어리를 삭제한다
      * @param diaryId 삭제하려는 다이어리 아이디
      */
-    public void deleteDiary(Long diaryId);
+    public void deleteDiary(int diaryId) throws BusinessException;
 
 }
