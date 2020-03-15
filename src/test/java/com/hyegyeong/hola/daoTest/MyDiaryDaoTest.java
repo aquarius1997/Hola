@@ -25,7 +25,7 @@ public class MyDiaryDaoTest {
      * @throws Exception
      */
     @Test
-    public void testInsertDiary() throws Exception {
+    public void testInsertDiary () throws Exception {
         DiaryDTO diaryDTO = new DiaryDTO();
         diaryDTO.setTitle("testTitle3");
         diaryDTO.setContent("test Content3");
@@ -42,7 +42,7 @@ public class MyDiaryDaoTest {
      * @throws BusinessException
      */
     @Test
-    public void testSelectDiaryList() throws Exception {
+    public void testSelectDiaryList () throws Exception {
         myDiaryDAO.selectDiaryList(1);
     }
 
@@ -51,7 +51,7 @@ public class MyDiaryDaoTest {
      * @throws Exception
      */
     @Test
-    public void testSelectDiary() throws Exception {
+    public void testSelectDiary () throws Exception {
         myDiaryDAO.selectDiary(1);  //읽으려는 다이어리의 ID
     }
 
@@ -60,7 +60,7 @@ public class MyDiaryDaoTest {
      * @throws Exception
      */
     @Test
-    public void testUpdateDiary() throws Exception {
+    public void testUpdateDiary () throws Exception {
         DiaryDTO diaryDTO = new DiaryDTO();
         diaryDTO.setDiaryId(1);
         diaryDTO.setTitle("updated Title3");
@@ -73,7 +73,7 @@ public class MyDiaryDaoTest {
     }
 
     @Test
-    public void testDeleteDiary() throws Exception {
+    public void testDeleteDiary () throws Exception {
         int resultNums = myDiaryDAO.deleteDiary(1); //1번 다이어리를 삭제(삭제여부를 Y로 업데)
         log.info("success delete Diary : " + resultNums);
     }

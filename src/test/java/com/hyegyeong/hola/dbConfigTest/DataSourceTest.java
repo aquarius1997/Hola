@@ -17,7 +17,7 @@ public class DataSourceTest {
     private DataSource dataSource;
 
     @Test
-    public void testConnection() throws Exception {
+    public void testConnection () throws Exception {
         try(Connection connection = dataSource.getConnection()) {
             System.out.println(connection);
         } catch (Exception e) {

@@ -17,12 +17,12 @@ public class MybatisTest {
     private SqlSessionFactory sqlSessionFactory;
 
     @Test
-    public void testFactory() {
+    public void testFactory () {
         System.out.println(sqlSessionFactory);
     }
 
     @Test
-    public void testSession() throws Exception {
+    public void testSession () throws Exception {
         try(SqlSession session = sqlSessionFactory.openSession()) {
             System.out.println(session);
         } catch (Exception e) {

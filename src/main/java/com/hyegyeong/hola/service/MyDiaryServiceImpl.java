@@ -28,9 +28,10 @@ public class MyDiaryServiceImpl implements MyDiaryService {
     /**
      * 새로운 다이어리를 추가한다
      * @param diaryDTO 추가하려는 내용을 담고있는 다이어리 객체
+     * @throws BusinessException if fail to save Diary, throws exception
      */
     @Override
-    public void insertDiary(DiaryDTO diaryDTO) throws BusinessException {
+    public void insertDiary (DiaryDTO diaryDTO) throws BusinessException {
         log.info("insertDiary");
         if(diaryDTO.getOpnFlag() == null) {
             diaryDTO.setOpnFlag("Y");
@@ -50,7 +51,7 @@ public class MyDiaryServiceImpl implements MyDiaryService {
      * @return 특정 회원이 작성한 모든 다이어리 객체
      */
     @Override
-    public List<DiaryDTO> selectDiaryList(int memberId) {
+    public List<DiaryDTO> selectDiaryList (int memberId) {
         log.info("selectDiaryList()");
         return myDiaryDAO.selectDiaryList(memberId);
     }
@@ -59,9 +60,10 @@ public class MyDiaryServiceImpl implements MyDiaryService {
      * 특정 다이어리 하나를 읽는다
      * @param diaryId 읽어려는 다이어리의 아이디
      * @return 읽어온 다이어리 객체
+     * @throws BusinessException if fail to select one Diary, throws exception
      */
     @Override
-    public DiaryDTO selectDiary(int diaryId) throws BusinessException {
+    public DiaryDTO selectDiary (int diaryId) throws BusinessException {
         log.info("selectDiary(diaryId)");
         return myDiaryDAO.selectDiary(diaryId);
     }
@@ -71,10 +73,17 @@ public class MyDiaryServiceImpl implements MyDiaryService {
      * 중간에 입력안된 속성은 여기서 처리해주는걸로 수정해야함. 수정 시간 업데이트 필요함
      * @param diaryDTO 수정하려는 다이어리의 아이디
      * @return 수정한 다이어리 객체
+     * @throws BusinessException if fail to update Diary, throws exception
      */
     @Override
-    public DiaryDTO updateDiary(DiaryDTO diaryDTO) throws BusinessException {
+    public DiaryDTO updateDiary (DiaryDTO diaryDTO) throws BusinessException {
         log.info("updateDiary(diaryDTO)");
+        if(diaryDTO.getOpnFlag() == null) {
+            diaryDTO.setOpnFlag("Y");
+        }
+        if(diaryDTO.getMoodCode() == null) {
+            diaryDTO.setMoodCode("NO");
+        }
         int recordNums = myDiaryDAO.updateDiary(diaryDTO);  //update 영향을 받은 레코드 수 알아내서
         if(recordNums == 0) {   //업데이트된게 없으면 예외던지기
             new BusinessException(ErrorCode.BOARD_NOT_EXIST);
@@ -86,9 +95,10 @@ public class MyDiaryServiceImpl implements MyDiaryService {
     /**
      * 다이어리를 삭제한다
      * @param diaryId 삭제하려는 다이어리 아이디
+     * @throws BusinessException if fail to delete Diary, throws exception
      */
     @Override
-    public void deleteDiary(int diaryId) throws BusinessException {
+    public void deleteDiary (int diaryId) throws BusinessException {
         log.info("deleteDiary(diaryId)");
         int recordNums = myDiaryDAO.deleteDiary(diaryId);    //delete 영향을 받은 레코드 수 알아내서
         if(recordNums == 0) {   //삭제된 데이터가 없으면 예외

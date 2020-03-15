@@ -33,20 +33,20 @@ public class MyDiaryControllerTest {
     private MockMvc mockMvc;
 
     @Before
-    public void setup() {
+    public void setup () {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
         logger.info("End setup...");
     }
 
     /**
      * 사용자 ID가 1인 유저가 다이어리를 저장하는 요청을 제대로 받아 처리하는지 테스트
-     * @throws Exception
+     * @throws Exception 테스트 실패시 Exception 발생
      */
     @Test
-    public void testSaveDiary() throws Exception {
+    public void testSaveDiary () throws Exception {
         DiaryDTO diaryDTO = new DiaryDTO();
-        diaryDTO.setTitle("Controller Unit Test");
-        diaryDTO.setContent("controller test content");
+        diaryDTO.setTitle("Controller Unit Test33");
+        diaryDTO.setContent("controller test content33");
         diaryDTO.setMemberId(1);
 
         //jackson의 ObjectMapper를 이용해 객체를 json으로 변환
@@ -63,15 +63,62 @@ public class MyDiaryControllerTest {
     }
 
     /**
-     *
-     * @throws Exception
+     * 특정 사용자가 게시한 모든 다이어리를 가져온다.
+     * @throws Exception 테스트 실패시 Exception 발생
      */
     @Test
-    public void testGetDiaryList() throws Exception {
+    public void testGetDiaryList () throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/my-diaries/{memberId}", 1))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
 
+    /**
+     * 다이어리의 내용을 읽어온다
+     * @throws Exception 테스트 실패시 Exception 발생
+     */
+    @Test
+    public void testGetDiary () throws Exception {
 
+        mockMvc.perform(MockMvcRequestBuilders.get("/my-diaries/{memberId}/{diaryId}",1, 1)
+                .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    /**
+     * 다이어리 내용을 수정한다
+     * @throws Exception 테스트 실패시 Exception 발생
+     */
+    @Test
+    public void testUpdateDiary () throws Exception {
+        DiaryDTO diaryDTO = new DiaryDTO();
+        diaryDTO.setTitle("Controller Unit test");
+        diaryDTO.setContent("update test");
+        diaryDTO.setMemberId(1);
+        diaryDTO.setDiaryId(1);
+
+        //jackson의 ObjectMapper를 이용해 객체를 json으로 변환
+        ObjectMapper objectMapper = new ObjectMapper();
+        String json = objectMapper.writeValueAsString(diaryDTO);
+
+        mockMvc.perform(MockMvcRequestBuilders
+                .put("/my-diaries/diary")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(json)
+                .characterEncoding("utf-8"))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    /**
+     * 다이어리 아이디에 해당하는 다이어리르 삭제한다
+     * @throws Exception 테스트 실패시 Exception 발생
+     */
+    @Test
+    public void testDeleteDiary () throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.delete("/my-diaries/{diaryId}", 2))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
 }
