@@ -51,7 +51,7 @@
 
 1. 사용자 페이지
 
-/my-diaries 하위
+**/my-diaries** 하위
 
 | Method | Path | PathVariable | ResponseBody |
 |:---:|:---:|:---:|:---:|
