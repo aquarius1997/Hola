@@ -50,7 +50,7 @@ public class MyDiaryController {
      * @throws BusinessException if fail to get one Diary, throws exception
      */
     @GetMapping("/{memberId}/{diaryId}")
-    public ResponseEntity<DiaryDTO> getDiary (@PathVariable("diaryId") final int memberId,
+    public ResponseEntity<DiaryDTO> getDiary (@PathVariable("memberId") final int memberId,
                                               @PathVariable("diaryId") final int diaryId) throws BusinessException {
         log.info("getDiary...");
         return ResponseEntity.status(HttpStatus.OK).body(myDiaryService.selectDiary(diaryId));

@@ -47,4 +47,19 @@
 
 ## API URL
 
+현재까지 컨트롤러로 구현한 API URL
+
+1. 사용자 페이지
+
+/my-diaries 하위
+
+| Method | Path | PathVariable | ResponseBody |
+|:---:|:---:|:---:|:---:|
+|POST|/diary|.|.|
+|GET|.|memberId|사용자가 등록한 전체 다이어리 조회|
+|GET|.|memberId, diaryId|사용자의 특정 다이어리 조회|
+|PUT|/diary|.|수정한 다이어리|
+|DELETE|.|diaryId|삭제 결과|
+
+
 
