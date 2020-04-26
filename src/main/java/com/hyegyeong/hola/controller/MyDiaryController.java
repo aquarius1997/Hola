@@ -7,7 +7,9 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -37,10 +39,19 @@ public class MyDiaryController {
      * @return All Trip Diary's List
      */
     @GetMapping("/{memberId}")
+    public ModelAndView getDiaryList (@PathVariable("memberId") final int memberId) {
+        log.info("getDiaryList.. @PathVariable(memberId)  : " + memberId);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("my-diaries/list");
+        modelAndView.addObject("diaryList", myDiaryService.selectDiaryList(memberId));
+        return modelAndView;
+    }
+/*    @GetMapping("/{memberId}")
     public ResponseEntity<List<DiaryDTO>> getDiaryList (@PathVariable("memberId") final int memberId) {
         log.info("getDiaryList.. @PathVariable(memberId)  : " + memberId);
+
         return ResponseEntity.status(HttpStatus.OK).body(myDiaryService.selectDiaryList(memberId));
-    }
+    }*/
 
     /**
      * Get One User's Trip Diary
