@@ -12,7 +12,7 @@
     <style>
         header {
             font-family: 'Raleway', sans-serif;
-            height: 75px;
+            height: 30px;
             padding: 1rem;
             color: white;
             background-color: #a3d41e;
@@ -26,7 +26,6 @@
 
 </head>
 <body>
-
     <header>
         <h1>Hola!</h1>
         <nav>

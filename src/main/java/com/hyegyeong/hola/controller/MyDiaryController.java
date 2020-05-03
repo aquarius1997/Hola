@@ -42,7 +42,7 @@ public class MyDiaryController {
     public ModelAndView getDiaryList (@PathVariable("memberId") final int memberId) {
         log.info("getDiaryList.. @PathVariable(memberId)  : " + memberId);
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("my-diaries/list");
+        modelAndView.setViewName("my-diaries/mainList");
         modelAndView.addObject("diaryList", myDiaryService.selectDiaryList(memberId));
         return modelAndView;
     }
