@@ -5,3 +5,4 @@ MySQLConnectionTest.java
 *.properties
 .idea/
 out/
+target/
