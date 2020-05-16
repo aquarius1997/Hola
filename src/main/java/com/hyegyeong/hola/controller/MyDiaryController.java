@@ -46,12 +46,6 @@ public class MyDiaryController {
         modelAndView.addObject("diaryList", myDiaryService.selectDiaryList(memberId));
         return modelAndView;
     }
-/*    @GetMapping("/{memberId}")
-    public ResponseEntity<List<DiaryDTO>> getDiaryList (@PathVariable("memberId") final int memberId) {
-        log.info("getDiaryList.. @PathVariable(memberId)  : " + memberId);
-
-        return ResponseEntity.status(HttpStatus.OK).body(myDiaryService.selectDiaryList(memberId));
-    }*/
 
     /**
      * Get One User's Trip Diary
@@ -61,11 +55,20 @@ public class MyDiaryController {
      * @throws BusinessException if fail to get one Diary, throws exception
      */
     @GetMapping("/{memberId}/{diaryId}")
+    public ModelAndView getDiary (@PathVariable("memberId") final int memberId,
+                                              @PathVariable("diaryId") final int diaryId) throws BusinessException {
+        log.info("getDiary...");
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("my-diaries/diary");
+        modelAndView.addObject("diary", myDiaryService.selectDiary(diaryId));
+        return modelAndView;
+    }
+/*    @GetMapping("/{memberId}/{diaryId}")
     public ResponseEntity<DiaryDTO> getDiary (@PathVariable("memberId") final int memberId,
                                               @PathVariable("diaryId") final int diaryId) throws BusinessException {
         log.info("getDiary...");
         return ResponseEntity.status(HttpStatus.OK).body(myDiaryService.selectDiary(diaryId));
-    }
+    }*/
 
     /**
      * Update Trip Diary
