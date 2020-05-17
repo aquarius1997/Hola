@@ -6,6 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <!--Font-->
     <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
     <!--CSS-->
@@ -14,7 +17,7 @@
 </head>
 <body>
 <div id="wrapper">
-    <dif id="main">
+    <div id="main">
         <!-- 왼쪽 네비게이션 위치를 뺌-->
         <div class="inner">
 

@@ -95,10 +95,19 @@ public class MyDiaryController {
      * @throws BusinessException if fail to update one Diary, throws exception
      */
     @PutMapping("/diary")
+    public String updateDiary (@RequestBody DiaryDTO diaryDTO) throws BusinessException {
+        log.info("updateDiary...");
+
+        DiaryDTO diaryDTO1 = myDiaryService.updateDiary(diaryDTO);
+
+        return "redirect:/my-diaries/" + diaryDTO1.getMemberId();
+    }
+
+/*    @PutMapping("/diary")
     public ResponseEntity<DiaryDTO> updateDiary (@RequestBody DiaryDTO diaryDTO) throws BusinessException {
         log.info("updateDiary...");
         return ResponseEntity.status(HttpStatus.OK).body(myDiaryService.updateDiary(diaryDTO));
-    }
+    }*/
 
     /**
      * Delete Trip Diary
