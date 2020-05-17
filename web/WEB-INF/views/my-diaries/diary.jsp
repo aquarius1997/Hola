@@ -9,11 +9,11 @@
 <section class="diary">
     <div>
         <span>
-            <img src="/resources/mydiary/images/IMG_1417.jpeg" alt="" />
+            <img src="/resources/mydiary/images/IMG_1417.jpeg" alt="" style="cursor:pointer"/>
             <span id="diaryText">
                 <span id="diaryTitle"><h2><c:out value="${diary.title}"/></h2></span>
                 <span id="diaryDetails">
-                    <div><c:out value="${diary.title}"/></div>
+                    <div><c:out value="${diary.content}"/></div>
                 </span>
             </span>
         </span>
@@ -27,9 +27,14 @@
 
 <div class="buttons">
     <!-- 수정버튼-->
-    <button data-oper="modify" class="btn-default">Modify</button>
+    <button data-oper="modify" class="btn-default"><a href="/my-diaries/<c:out value="${memberId}"/>/<c:out value="${diary.diaryId}"/>/detail">Modify</a></button>
+
     <!--삭제버튼 -->
     <button data-oper="remove" class="btn-danger">Remove</button>
 </div>
+
+
+
+<%@include file="../includes/mydiariesFooter.jsp"%>
 
 

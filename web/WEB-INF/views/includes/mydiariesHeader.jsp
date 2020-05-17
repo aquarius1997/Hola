@@ -20,7 +20,7 @@
 
             <!-- header -->
             <header id="header">
-                <a href="#">Hola!</a>
+                <a href="/my-diaries/<c:out value="${memberId}"/>">Hola!</a>
                 <ul>
                     <li><a href="#">Mypage</a></li>
                 </ul>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@include file="../includes/mydiariesHeader.jsp"%>
 
@@ -21,12 +21,14 @@
     <c:forEach items="${diaryList}" var="diary">
         <article>
             <span class="image">
-                <img src="/resources/mydiary/images/IMG_1417.jpeg" alt=""/>
+                <img src="/resources/mydiary/images/IMG_1417.jpeg" alt="" onclick="location.href='/my-diaries/<c:out value="${memberId}"/>/<c:out value="${diary.diaryId}"/>'" style="cursor:pointer"/>
             </span>
         </article>
     </c:forEach>
 </section>
 
 
+
+<%@include file="../includes/mydiariesFooter.jsp"%>
 
 

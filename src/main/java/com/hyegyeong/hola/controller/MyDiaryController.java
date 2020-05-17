@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Slf4j
@@ -43,6 +44,7 @@ public class MyDiaryController {
         log.info("getDiaryList.. @PathVariable(memberId)  : " + memberId);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("my-diaries/list");
+        modelAndView.addObject("memberId", memberId);
         modelAndView.addObject("diaryList", myDiaryService.selectDiaryList(memberId));
         return modelAndView;
     }
@@ -51,24 +53,40 @@ public class MyDiaryController {
      * Get One User's Trip Diary
      * @param memberId User Id
      * @param diaryId Diary Id
-     * @return DiaryDTO
+     * @return Diary ModelAndView
      * @throws BusinessException if fail to get one Diary, throws exception
      */
     @GetMapping("/{memberId}/{diaryId}")
     public ModelAndView getDiary (@PathVariable("memberId") final int memberId,
                                               @PathVariable("diaryId") final int diaryId) throws BusinessException {
         log.info("getDiary...");
+
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("my-diaries/diary");
+        modelAndView.addObject("memberId", memberId);
         modelAndView.addObject("diary", myDiaryService.selectDiary(diaryId));
         return modelAndView;
     }
-/*    @GetMapping("/{memberId}/{diaryId}")
-    public ResponseEntity<DiaryDTO> getDiary (@PathVariable("memberId") final int memberId,
-                                              @PathVariable("diaryId") final int diaryId) throws BusinessException {
-        log.info("getDiary...");
-        return ResponseEntity.status(HttpStatus.OK).body(myDiaryService.selectDiary(diaryId));
-    }*/
+
+    /**
+     * Get Modify Page
+     * @param memberId User Id
+     * @param diaryId Diary Id
+     * @return Modify ModelAndView
+     * @throws BusinessException
+     */
+    @GetMapping("/{memberId}/{diaryId}/detail")
+    public ModelAndView getModify (@PathVariable("memberId") final int memberId,
+                                  @PathVariable("diaryId") final int diaryId) throws BusinessException {
+        log.info("getModify...");
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("my-diaries/modify");
+        modelAndView.addObject("memberId", memberId);
+        modelAndView.addObject("diary", myDiaryService.selectDiary(diaryId));
+        return modelAndView;
+    }
+
 
     /**
      * Update Trip Diary
