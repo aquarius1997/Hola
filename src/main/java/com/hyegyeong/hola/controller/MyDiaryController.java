@@ -5,16 +5,11 @@ import com.hyegyeong.hola.exception.BusinessException;
 import com.hyegyeong.hola.service.MyDiaryService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 @Slf4j
 @Controller
@@ -97,20 +92,14 @@ public class MyDiaryController {
      * @throws BusinessException if fail to update one Diary, throws exception
      */
     @PutMapping("/diary")
-    public String updateDiary (@RequestBody DiaryDTO diaryDTO) throws BusinessException {
+    @ResponseBody
+    public DiaryDTO updateDiary (@RequestBody DiaryDTO diaryDTO) throws BusinessException {
         log.info("updateDiary...");
 
         DiaryDTO diaryDTO1 = myDiaryService.updateDiary(diaryDTO);
-
-        return "redirect:/my-diaries/" + diaryDTO1.getMemberId();
-
+        return diaryDTO1;
     }
 
-/*    @PutMapping("/diary")
-    public ResponseEntity<DiaryDTO> updateDiary (@RequestBody DiaryDTO diaryDTO) throws BusinessException {
-        log.info("updateDiary...");
-        return ResponseEntity.status(HttpStatus.OK).body(myDiaryService.updateDiary(diaryDTO));
-    }*/
 
     /**
      * Delete Trip Diary

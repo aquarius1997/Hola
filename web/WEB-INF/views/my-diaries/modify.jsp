@@ -4,7 +4,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <%@include file="../includes/mydiariesHeader.jsp"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <!--Diary-->
 <section class="diary">
@@ -13,9 +12,9 @@
             <span>
                 <img src="/resources/mydiary/images/IMG_1417.jpeg" alt="" style="cursor:pointer"/>
                 <span id="diaryText">
-                    <span id="diaryTitle"><input class="input-default" id="title" value="<c:out value="${diary.title}"/>" placeholder="Title"></span>
+                    <span id="diaryTitle"><input class="input-default" id="input-title" value="<c:out value="${diary.title}"/>" placeholder="Title"></span>
                     <span id="diaryDetails">
-                        <div><textarea class="input-default" id="content" placeholder="Content"><c:out value="${diary.content}"/></textarea></div>
+                        <div><textarea class="input-default" id="input-content" placeholder="Content"><c:out value="${diary.content}"/></textarea></div>
                     </span>
                 </span>
             </span>
@@ -69,13 +68,13 @@
 
 
            if(operation === 'remove') {
-               formObj.attr("action", "");
+
            } else if (operation === 'modify') {
                 console.log("modify clicked");
 
                 var formObj = {}
-                formObj["title"] = $("#title").val();
-                formObj["content"] = $("#content").val();
+                formObj["title"] = $("#input-title").val();
+                formObj["content"] = $("#input-content").val();
                 formObj["moodCode"] = $("#moodCode").val();
                 formObj["opnFlag"] = $("#opnFlag").val();
                 formObj["memberId"] = <c:out value="${memberId}"/>
@@ -84,17 +83,15 @@
                 console.log(formObj);
 
                $.ajax({
-                    type:"PUT",
-                    url:"my-diaries/diary",
+                    type:"put",
+                    url:"/my-diaries/diary",
                     contentType: "application/json; charset=UTF-8",
                     dataType: "json",
                     data:JSON.stringify(formObj),
                    success : function() {
                        console.log("SUCCESS");
-                      // window.location = '/my-diaries/<c:out value="${memberId}"/>';
-                       window.location.replace('/my-diaries/<c:out value="${memberId}"/>');
+                       window.location.href = "/my-diaries/<c:out value="${memberId}"/>/<c:out value="${diary.diaryId}"/>";
                    }
-
                 });
            }
        });
