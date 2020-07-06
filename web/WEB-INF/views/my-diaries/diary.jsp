@@ -27,13 +27,55 @@
 
 <div class="buttons">
     <!-- 수정버튼-->
-    <button data-oper="modify" class="btn-default"><a href="/my-diaries/<c:out value="${memberId}"/>/<c:out value="${diary.diaryId}"/>/detail">Modify</a></button>
+<%--    <button data-oper="modify" class="btn-default"><a href="/my-diaries/<c:out value="${memberId}"/>/<c:out value="${diary.diaryId}"/>/detail">Modify</a></button>--%>
+    <button data-oper="modify" class="btn-default">Modify</button>
 
     <!--삭제버튼 -->
     <button data-oper="remove" class="btn-danger">Remove</button>
 </div>
 
+<script>
+    $(document).ready(function() {
+        $('button').on("click", function(e) {
+            e.preventDefault();
 
+            var operation = $(this).data("oper");
+            if(operation === 'remove') {
+
+                console.log("remove clicked");
+
+                var formObj = {};
+                formObj["memberId"] = <c:out value="${memberId}"/>
+                formObj["diaryId"] = <c:out value="${diary.diaryId}"/>
+
+                console.log(formObj);
+
+                $.ajax({
+                    type:"delete",
+                    url:"/my-diaries/<c:out value="${diary.diaryId}"/>",
+                    contentType: "application/json; charset=UTF-8",
+                    dataType: "json",
+                    data:JSON.stringify(formObj),
+                    success : function() {
+                        console.log("SUCCESS");
+                        window.location.href = "/my-diaries/<c:out value="${memberId}"/>";
+                    }
+                });
+            } else if(operation === 'modify') {
+                console.log("modify clicked");
+
+                $.ajax({
+                    type:"get",
+                    url:"/my-diaries/<c:out value="${memberId}"/>/<c:out value="${diary.diaryId}"/>/detail",
+                    success : function() {
+                        console.log("SUCCESS");
+                        window.location.href = "/my-diaries/<c:out value="${memberId}"/>/<c:out value="${diary.diaryId}"/>/detail";
+                    }
+                })
+            }
+        })
+    })
+</script>
 
 <%@include file="../includes/mydiariesFooter.jsp"%>
 

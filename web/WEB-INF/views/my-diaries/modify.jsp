@@ -72,7 +72,7 @@
            } else if (operation === 'modify') {
                 console.log("modify clicked");
 
-                var formObj = {}
+                var formObj = {};
                 formObj["title"] = $("#input-title").val();
                 formObj["content"] = $("#input-content").val();
                 formObj["moodCode"] = $("#moodCode").val();

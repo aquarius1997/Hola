@@ -103,15 +103,17 @@ public class MyDiaryController {
 
     /**
      * Delete Trip Diary
-     * @param diaryId DiaryDTO
+     * @param diaryDTO DiaryDTO
      * @return result of delete operation
      * @throws BusinessException if fail to delete one Diary, throws exception
      */
     @DeleteMapping("/{diaryId}")
-    public ResponseEntity<String> deleteDiary (@PathVariable("diaryId") final int diaryId) throws BusinessException {
+    @ResponseBody
+    public DiaryDTO deleteDiary (@RequestBody DiaryDTO diaryDTO) throws BusinessException {
         log.info("deleteDiary...");
-        myDiaryService.deleteDiary(diaryId);
-        return ResponseEntity.status(HttpStatus.OK).body("Delete success");
+        myDiaryService.deleteDiary(diaryDTO.getDiaryId());
+        log.info("ResponseBody check");
+        return diaryDTO;
     }
 
 

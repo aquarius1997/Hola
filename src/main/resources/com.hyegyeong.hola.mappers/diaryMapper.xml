@@ -57,6 +57,7 @@
            ,MOOD_CODE = #{moodCode}
            ,OPN_FLAG = #{opnFlag}
      WHERE DIARY_ID = #{diaryId}
+       AND MEMBER_ID = #{memberId}
        AND DEL_FLAG = 'N'
     </update>
 

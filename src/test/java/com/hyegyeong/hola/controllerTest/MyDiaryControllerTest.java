@@ -45,8 +45,8 @@ public class MyDiaryControllerTest {
     @Test
     public void testSaveDiary () throws Exception {
         DiaryDTO diaryDTO = new DiaryDTO();
-        diaryDTO.setTitle("Controller Unit Test6");
-        diaryDTO.setContent("controller test content6..");
+        diaryDTO.setTitle("Controller Unit Test7");
+        diaryDTO.setContent("controller test content7..");
         diaryDTO.setMemberId(1);
 
         //jackson의 ObjectMapper를 이용해 객체를 json으로 변환
