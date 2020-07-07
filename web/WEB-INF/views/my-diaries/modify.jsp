@@ -68,7 +68,25 @@
 
 
            if(operation === 'remove') {
+               console.log("remove clicked");
 
+               var formObj = {};
+               formObj["memberId"] = <c:out value="${memberId}"/>
+                   formObj["diaryId"] = <c:out value="${diary.diaryId}"/>
+
+                       console.log(formObj);
+
+               $.ajax({
+                   type:"delete",
+                   url:"/my-diaries/<c:out value="${diary.diaryId}"/>",
+                   contentType: "application/json; charset=UTF-8",
+                   dataType: "json",
+                   data:JSON.stringify(formObj),
+                   success : function() {
+                       console.log("SUCCESS");
+                       window.location.href = "/my-diaries/<c:out value="${memberId}"/>";
+                   }
+               });
            } else if (operation === 'modify') {
                 console.log("modify clicked");
 

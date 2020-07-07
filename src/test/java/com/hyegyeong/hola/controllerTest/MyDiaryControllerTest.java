@@ -54,7 +54,7 @@ public class MyDiaryControllerTest {
         String json = objectMapper.writeValueAsString(diaryDTO);
 
         mockMvc.perform(MockMvcRequestBuilders
-                .post("/my-diaries/diary")
+                .post("/my-diaries/{memberId}", 1)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json)
                 .characterEncoding("utf-8"))

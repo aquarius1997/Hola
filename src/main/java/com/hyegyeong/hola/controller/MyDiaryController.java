@@ -24,10 +24,24 @@ public class MyDiaryController {
      * @param diaryDTO DiaryDTO
      * @throws BusinessException if fail to save Diary, throws exception
      */
-    @PostMapping("/diary")
-    public void saveDiary (@RequestBody DiaryDTO diaryDTO) throws BusinessException{
+    @PostMapping("/{memberId}")
+    public void saveDiary (@PathVariable("memberId") final int memberId,
+                           @RequestBody DiaryDTO diaryDTO) throws BusinessException{
         log.info("saveDiary.. diaryDTO : " + diaryDTO);
         myDiaryService.insertDiary(diaryDTO);
+    }
+
+    /**
+     * 새로운 다이어리를 등록하는 페이지를 가져온다
+     * @param memberId 등록하려는 사람의 memberId
+     */
+    @GetMapping("/{memberId}/newDiary")
+    public ModelAndView getSaveDiaryPage (@PathVariable("memberId") final int memberId) {
+        log.info("getSaveDiaryPage...");
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("my-diaries/register");
+        modelAndView.addObject("memberId", memberId);
+        return modelAndView;
     }
 
     /**

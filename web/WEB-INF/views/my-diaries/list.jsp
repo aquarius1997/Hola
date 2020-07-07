@@ -8,12 +8,13 @@
 
 <!-- Banner -->
 <section id="banner">
-    <span class="profileImg"><img src="/resources/mydiary/images/profileImg.JPG" alt="그림아직지정못함"></span>
-    <span>
-        <header id="profileText">
-            <h1>User Message</h1>
-        </header>
-    </span>
+    <div class="profileImg">
+        <img src="/resources/mydiary/images/profileImg.JPG" alt="그림아직지정못함">
+    </div>
+    <div class="profileMsg">
+        <h1>I am not happy.</h1>
+        <button class="btn-default" onclick="location.href='<c:out value="${memberId}"/>/newDiary'">Register</button>
+    </div>
 </section>
 
 <!-- diaries : 다이어리 사진들 보여주기-->

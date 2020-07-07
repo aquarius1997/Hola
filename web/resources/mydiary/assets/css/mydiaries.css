@@ -18,6 +18,13 @@ img { border: 0; }
     overflow: hidden;
 }
 
+.profileMsg > h1 {
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+
+
 /* diaries : 사용자가 올린 모든 다이어리 사진을 3개씩 묶음으로 보여줌*/
 
 .diaries {
@@ -259,17 +266,7 @@ img { border: 0; }
     margin-right:10px;
 }
 
-/*.diaryEx .btn-default {
-    height: 2.75em;
-    line-height: 1.65;
-    margin-left: 25px;
-}
 
-.diaryEx .btn-danger {
-    height: 2.75em;
-    line-height: 1.65;
-    margin-left: 25px;
-}*/
 
 
 /*ID선택자 CSS*/
@@ -316,9 +313,12 @@ img { border: 0; }
     padding: 0 0.5em 1em 1em;
     border-bottom: solid 2px #DCDCDC;
 }
-#profileText > h1 {
-    padding: 5em 0.5em 2em 0;
-    /* padding: 165px 5px 20px 0; */
+
+#banner > div {
+    display: inline-block;
+    vertical-align: middle;
+    width: 17em;
+    height: 13em;
 }
 
 
