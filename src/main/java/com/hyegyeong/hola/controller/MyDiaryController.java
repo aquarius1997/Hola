@@ -39,8 +39,10 @@ public class MyDiaryController {
     public ModelAndView getSaveDiaryPage (@PathVariable("memberId") final int memberId) {
         log.info("getSaveDiaryPage...");
         ModelAndView modelAndView = new ModelAndView();
+        DiaryDTO diaryDTO = new DiaryDTO();
         modelAndView.setViewName("my-diaries/register");
         modelAndView.addObject("memberId", memberId);
+        modelAndView.addObject("diary", diaryDTO);   //새로 추가할 다이어리 내용
         return modelAndView;
     }
 
