@@ -24,7 +24,6 @@ img { border: 0; }
 }
 
 
-
 /* diaries : 사용자가 올린 모든 다이어리 사진을 3개씩 묶음으로 보여줌*/
 
 .diaries {
@@ -266,6 +265,21 @@ img { border: 0; }
     margin-right:10px;
 }
 
+.register-diaryEx {
+    box-shadow: inset 0 0 0 2px #f56a6a;
+    color: black;
+    width: fit-content;
+    margin-top: 2em;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 0.375em;
+}
+
+.register-diaryEx > * {
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 
 
 
@@ -353,3 +367,18 @@ img { border: 0; }
 #input-content {
     height: 420px;
 }
+
+#register-title {
+    margin-left:15%;
+    margin-top:1.5em;
+    width: 70%;
+    height: 2em;
+}
+
+#register-Detail {
+    margin-left:15%;
+    margin-top:1em;
+    width: 70%;
+    height: 100%;
+}
+

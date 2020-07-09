@@ -11,11 +11,11 @@
         <div>
             <input id="register-title" value="<c:out value="${diary.title}"/>" placeholder="Input Your Diary Title">
         </div>
-        <div>
+        <div style="height: 300px;">
             <textarea id="register-Detail" placeholder="Input Your Diary Texts"><c:out value="${diary.content}"/></textarea>
         </div>
         <div class="register-diaryEx">
-            <p>Mood</p>
+            <p style="margin-left: 10px">Mood</p>
             <select id="moodCode" class="select-basic">
                 <option value="<c:out value="${diary.moodCode}"/>"><c:out value="${diary.moodCode}"/></option>
                 <option value="NA">Angry</option>
@@ -29,13 +29,13 @@
                 <option value="PP">Peaceful</option>
             </select>
             <p>공개설정</p>
-            <select id="opnFlag" class="select-basic">
+            <select id="opnFlag" class="select-basic" style="margin-right: 10px">
                 <option value="<c:out value="${diary.opnFlag}"/>"><c:out value="${diary.opnFlag}"/></option>
                 <option value="N">비공개</option>
                 <option value="Y">공개</option>
             </select>
         </div>
-        <div>
+        <div style="margin-left: auto;margin-right:auto;width: fit-content;margin-top: 10px;">
             <button data-oper="register" class="btn-default" type="submit">Register</button>
         </div>
     </form>
@@ -61,7 +61,7 @@
 
                 $.ajax({
                     type:"post",
-                    url:"/my-diaries/<c:out value=\"${memberId}\"/>",
+                    url:"/my-diaries/<c:out value="${memberId}"/>",
                     contentType: "application/json; charset=UTF-8",
                     dataType: "json",
                     data:JSON.stringify(formObj),

@@ -12,7 +12,7 @@
     <!--Font-->
     <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
     <!--CSS-->
-    <link rel="stylesheet" href="/resources/mydiary/assets/css/mydiaries.css?ver=23" />
+    <link rel="stylesheet" href="/resources/mydiary/assets/css/mydiaries.css?ver=5" />
 
 </head>
 <body>
