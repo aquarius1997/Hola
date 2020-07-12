@@ -5,14 +5,11 @@ import com.hyegyeong.hola.exception.BusinessException;
 import com.hyegyeong.hola.service.MyDiaryService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Slf4j
-@Controller
+@RestController
 @AllArgsConstructor
 @RequestMapping("/my-diaries")
 public class MyDiaryController {
@@ -25,10 +22,12 @@ public class MyDiaryController {
      * @throws BusinessException if fail to save Diary, throws exception
      */
     @PostMapping("/{memberId}")
-    public void saveDiary (@PathVariable("memberId") final int memberId,
+    @ResponseBody
+    public DiaryDTO saveDiary (@PathVariable("memberId") final int memberId,
                            @RequestBody DiaryDTO diaryDTO) throws BusinessException{
         log.info("saveDiary.. diaryDTO : " + diaryDTO);
         myDiaryService.insertDiary(diaryDTO);
+        return diaryDTO;
     }
 
     /**

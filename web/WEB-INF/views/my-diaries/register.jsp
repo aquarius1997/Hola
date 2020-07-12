@@ -17,10 +17,10 @@
         <div class="register-diaryEx">
             <p style="margin-left: 10px">Mood</p>
             <select id="moodCode" class="select-basic">
-                <option value="<c:out value="${diary.moodCode}"/>"><c:out value="${diary.moodCode}"/></option>
+                <option value="NO"/>None</option>
                 <option value="NA">Angry</option>
                 <option value="ND">Depressed</option>
-                <option value="NO">Nothing</option>
+                <option value="NO">None</option>
                 <option value="NA">Sad</option>
                 <option value="PA">Amused</option>
                 <option value="PC">Cheerful</option>
@@ -30,7 +30,7 @@
             </select>
             <p>공개설정</p>
             <select id="opnFlag" class="select-basic" style="margin-right: 10px">
-                <option value="<c:out value="${diary.opnFlag}"/>"><c:out value="${diary.opnFlag}"/></option>
+                <option value="Y">공개</option>
                 <option value="N">비공개</option>
                 <option value="Y">공개</option>
             </select>
@@ -57,7 +57,7 @@
                 formObj["memberId"] = <c:out value="${memberId}"/>
                 formObj["diaryId"] = <c:out value="${diary.diaryId}"/>
 
-                console.long(formObj);
+                console.log(formObj);
 
                 $.ajax({
                     type:"post",
@@ -67,7 +67,7 @@
                     data:JSON.stringify(formObj),
                     success : function() {
                         console.log("SUCCESS");
-                        window.location.href = "/my-diaries/<c:out value="${memberId}"/>/<c:out value="${diary.diaryId}"/>";
+                        window.location.href = "/my-diaries/<c:out value="${memberId}"/>";
                     }
                 });
             }

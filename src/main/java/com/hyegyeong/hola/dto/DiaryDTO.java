@@ -15,5 +15,14 @@ public class DiaryDTO {
     private String opnFlag; //공유여부
     private Date regDate;   //작성날짜
     private Date updDate;   //수정날짜
-    private String delFlag;  //삭제여부
+    private String delFlag;  //삭제여부다
+
+    //첨부파일관련
+    private String[] files;
+    private int fileCnt;
+
+    public void setFiles(String[] files) {  //게시글 입력/수정시 첨부파일 개수를 업데이트한다
+        this.files = files;
+        setFileCnt(files.length);
+    }
 }

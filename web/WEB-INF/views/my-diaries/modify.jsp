@@ -29,7 +29,7 @@
                         <option value="<c:out value="${diary.moodCode}"/>"><c:out value="${diary.moodCode}"/></option>
                         <option value="NA">Angry</option>
                         <option value="ND">Depressed</option>
-                        <option value="NO">Nothing</option>
+                        <option value="NO">None</option>
                         <option value="NA">Sad</option>
                         <option value="PA">Amused</option>
                         <option value="PC">Cheerful</option>
