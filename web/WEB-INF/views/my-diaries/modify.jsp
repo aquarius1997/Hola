@@ -78,7 +78,7 @@
 
                $.ajax({
                    type:"delete",
-                   url:"/my-diaries/<c:out value="${diary.diaryId}"/>",
+                   url:"/my-diaries/<c:out value="${memberId}"/>",
                    contentType: "application/json; charset=UTF-8",
                    dataType: "json",
                    data:JSON.stringify(formObj),

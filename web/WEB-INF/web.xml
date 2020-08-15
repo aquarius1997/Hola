@@ -44,4 +44,10 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+    <!-- 에러 jsp 페이지 설정 -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/error/error404.jsp</location>
+    </error-page>
+
 </web-app>

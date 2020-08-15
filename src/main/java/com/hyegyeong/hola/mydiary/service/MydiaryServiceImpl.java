@@ -1,10 +1,9 @@
-package com.hyegyeong.hola.service;
+package com.hyegyeong.hola.mydiary.service;
 
-
-import com.hyegyeong.hola.dao.MyDiaryDAO;
-import com.hyegyeong.hola.dto.DiaryDTO;
 import com.hyegyeong.hola.exception.BusinessException;
 import com.hyegyeong.hola.exception.ErrorCode;
+import com.hyegyeong.hola.mydiary.dao.MydiaryDao;
+import com.hyegyeong.hola.mydiary.dto.MydiaryDto;
 import lombok.AllArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -18,11 +17,11 @@ import java.util.List;
 @Service
 @Component
 @Slf4j
-public class MyDiaryServiceImpl implements MyDiaryService {
+public class MydiaryServiceImpl implements MydiaryService {
 
 
     @Setter(onMethod_ = @Autowired)
-    private MyDiaryDAO myDiaryDAO;
+    private MydiaryDao myDiaryDao;
 
 
     /**
@@ -31,7 +30,7 @@ public class MyDiaryServiceImpl implements MyDiaryService {
      * @throws BusinessException if fail to save Diary, throws exception
      */
     @Override
-    public void insertDiary (DiaryDTO diaryDTO) throws BusinessException {
+    public void insertDiary (MydiaryDto diaryDTO) throws BusinessException {
         log.info("insertDiary");
         if(diaryDTO.getOpnFlag() == null) {
             diaryDTO.setOpnFlag("Y");
@@ -39,7 +38,7 @@ public class MyDiaryServiceImpl implements MyDiaryService {
         if(diaryDTO.getMoodCode() == null) {
             diaryDTO.setMoodCode("NO");
         }
-        int recordNums = myDiaryDAO.insertDiary(diaryDTO);  //insert 영향을 받은 레코드의 수 알아내
+        int recordNums = myDiaryDao.insertDiary(diaryDTO);  //insert 영향을 받은 레코드의 수 알아내
         if(recordNums == 0 || recordNums > 1) {   //하나의 게시물만 생성됐는지 확인하고 아닐 경우 예외발생
             new BusinessException(ErrorCode.INSERT_FAIL);
         }
@@ -51,9 +50,9 @@ public class MyDiaryServiceImpl implements MyDiaryService {
      * @return 특정 회원이 작성한 모든 다이어리 객체
      */
     @Override
-    public List<DiaryDTO> selectDiaryList (int memberId) {
+    public List<MydiaryDto> selectDiaryList (int memberId) {
         log.info("selectDiaryList()");
-        return myDiaryDAO.selectDiaryList(memberId);
+        return myDiaryDao.selectDiaryList(memberId);
     }
 
     /**
@@ -63,9 +62,9 @@ public class MyDiaryServiceImpl implements MyDiaryService {
      * @throws BusinessException if fail to select one Diary, throws exception
      */
     @Override
-    public DiaryDTO selectDiary (int diaryId) throws BusinessException {
+    public MydiaryDto selectDiary (int diaryId) throws BusinessException {
         log.info("selectDiary(diaryId)");
-        return myDiaryDAO.selectDiary(diaryId);
+        return myDiaryDao.selectDiary(diaryId);
     }
 
     /**
@@ -76,7 +75,7 @@ public class MyDiaryServiceImpl implements MyDiaryService {
      * @throws BusinessException if fail to update Diary, throws exception
      */
     @Override
-    public DiaryDTO updateDiary (DiaryDTO diaryDTO) throws BusinessException {
+    public MydiaryDto updateDiary (MydiaryDto diaryDTO) throws BusinessException {
         log.info("updateDiary(diaryDTO)");
         if(diaryDTO.getOpnFlag() == null) {
             diaryDTO.setOpnFlag("Y");
@@ -84,7 +83,7 @@ public class MyDiaryServiceImpl implements MyDiaryService {
         if(diaryDTO.getMoodCode() == null) {
             diaryDTO.setMoodCode("NO");
         }
-        int recordNums = myDiaryDAO.updateDiary(diaryDTO);  //update 영향을 받은 레코드 수 알아내서
+        int recordNums = myDiaryDao.updateDiary(diaryDTO);  //update 영향을 받은 레코드 수 알아내서
         if(recordNums == 0) {   //업데이트된게 없으면 예외던지기
             new BusinessException(ErrorCode.BOARD_NOT_EXIST);
         }
@@ -100,7 +99,7 @@ public class MyDiaryServiceImpl implements MyDiaryService {
     @Override
     public void deleteDiary (int diaryId) throws BusinessException {
         log.info("deleteDiary(diaryId)");
-        int recordNums = myDiaryDAO.deleteDiary(diaryId);    //delete 영향을 받은 레코드 수 알아내서
+        int recordNums = myDiaryDao.deleteDiary(diaryId);    //delete 영향을 받은 레코드 수 알아내서
         if(recordNums == 0) {   //삭제된 데이터가 없으면 예외
             new BusinessException(ErrorCode.BOARD_NOT_EXIST);
         }

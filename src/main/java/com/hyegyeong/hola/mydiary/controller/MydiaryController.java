@@ -1,8 +1,8 @@
-package com.hyegyeong.hola.controller;
+package com.hyegyeong.hola.mydiary.controller;
 
-import com.hyegyeong.hola.dto.DiaryDTO;
 import com.hyegyeong.hola.exception.BusinessException;
-import com.hyegyeong.hola.service.MyDiaryService;
+import com.hyegyeong.hola.mydiary.dto.MydiaryDto;
+import com.hyegyeong.hola.mydiary.service.MydiaryService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -12,9 +12,9 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/my-diaries")
-public class MyDiaryController {
+public class MydiaryController {
 
-    private MyDiaryService myDiaryService;
+    private MydiaryService myDiaryService;
 
     /**
      * Create New Diary
@@ -23,8 +23,8 @@ public class MyDiaryController {
      */
     @PostMapping("/{memberId}")
     @ResponseBody
-    public DiaryDTO saveDiary (@PathVariable("memberId") final int memberId,
-                           @RequestBody DiaryDTO diaryDTO) throws BusinessException{
+    public MydiaryDto saveDiary (@PathVariable("memberId") final int memberId,
+                                 @RequestBody MydiaryDto diaryDTO) throws BusinessException{
         log.info("saveDiary.. diaryDTO : " + diaryDTO);
         myDiaryService.insertDiary(diaryDTO);
         return diaryDTO;
@@ -38,7 +38,7 @@ public class MyDiaryController {
     public ModelAndView getSaveDiaryPage (@PathVariable("memberId") final int memberId) {
         log.info("getSaveDiaryPage...");
         ModelAndView modelAndView = new ModelAndView();
-        DiaryDTO diaryDTO = new DiaryDTO();
+        MydiaryDto diaryDTO = new MydiaryDto();
         modelAndView.setViewName("my-diaries/register");
         modelAndView.addObject("memberId", memberId);
         modelAndView.addObject("diary", diaryDTO);   //새로 추가할 다이어리 내용
@@ -70,7 +70,7 @@ public class MyDiaryController {
      */
     @GetMapping("/{memberId}/{diaryId}")
     public ModelAndView getDiary (@PathVariable("memberId") final int memberId,
-                                              @PathVariable("diaryId") final int diaryId) throws BusinessException {
+                                  @PathVariable("diaryId") final int diaryId) throws BusinessException {
         log.info("getDiary...");
 
         ModelAndView modelAndView = new ModelAndView();
@@ -89,7 +89,7 @@ public class MyDiaryController {
      */
     @GetMapping("/{memberId}/{diaryId}/detail")
     public ModelAndView getModify (@PathVariable("memberId") final int memberId,
-                                  @PathVariable("diaryId") final int diaryId) throws BusinessException {
+                                   @PathVariable("diaryId") final int diaryId) throws BusinessException {
         log.info("getModify...");
 
         ModelAndView modelAndView = new ModelAndView();
@@ -108,10 +108,10 @@ public class MyDiaryController {
      */
     @PutMapping("/diary")
     @ResponseBody
-    public DiaryDTO updateDiary (@RequestBody DiaryDTO diaryDTO) throws BusinessException {
+    public MydiaryDto updateDiary (@RequestBody MydiaryDto diaryDTO) throws BusinessException {
         log.info("updateDiary...");
 
-        DiaryDTO diaryDTO1 = myDiaryService.updateDiary(diaryDTO);
+        MydiaryDto diaryDTO1 = myDiaryService.updateDiary(diaryDTO);
         return diaryDTO1;
     }
 
@@ -122,9 +122,9 @@ public class MyDiaryController {
      * @return result of delete operation
      * @throws BusinessException if fail to delete one Diary, throws exception
      */
-    @DeleteMapping("/{diaryId}")
+    @DeleteMapping("/{memberId}")
     @ResponseBody
-    public DiaryDTO deleteDiary (@RequestBody DiaryDTO diaryDTO) throws BusinessException {
+    public MydiaryDto deleteDiary (@RequestBody MydiaryDto diaryDTO) throws BusinessException {
         log.info("deleteDiary...");
         myDiaryService.deleteDiary(diaryDTO.getDiaryId());
         log.info("ResponseBody check");

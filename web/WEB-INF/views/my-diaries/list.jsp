@@ -12,7 +12,7 @@
         <img src="/resources/mydiary/images/profileImg.JPG" alt="그림아직지정못함">
     </div>
     <div class="profileMsg">
-        <h1>I am not happy.</h1>
+        <h1>User Profile Message</h1>
         <button class="btn-default" onclick="location.href='<c:out value="${memberId}"/>/newDiary'">Register</button>
     </div>
 </section>

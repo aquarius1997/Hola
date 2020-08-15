@@ -1,11 +1,11 @@
-package com.hyegyeong.hola.dto;
+package com.hyegyeong.hola.mydiary.dto;
 
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
-public class DiaryDTO {
+public class MydiaryDto {
     private int diaryId;   //게시물번호
     private String title;   //제목
     private String content; //본문
@@ -17,12 +17,10 @@ public class DiaryDTO {
     private Date updDate;   //수정날짜
     private String delFlag;  //삭제여부다
 
-    //첨부파일관련
-    private String[] files;
-    private int fileCnt;
+/*    //첨부파일관련
+    private String file;
 
-    public void setFiles(String[] files) {  //게시글 입력/수정시 첨부파일 개수를 업데이트한다
-        this.files = files;
-        setFileCnt(files.length);
-    }
+    public void setFiles(String file) {  //게시글 입력/수정시 첨부파일 개수를 업데이트한다
+        this.file = file;
+    }*/
 }

@@ -1,7 +1,7 @@
 package com.hyegyeong.hola.controllerTest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hyegyeong.hola.dto.DiaryDTO;
+import com.hyegyeong.hola.mydiary.dto.MydiaryDto;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,7 +44,7 @@ public class MyDiaryControllerTest {
      */
     @Test
     public void testSaveDiary () throws Exception {
-        DiaryDTO diaryDTO = new DiaryDTO();
+        MydiaryDto diaryDTO = new MydiaryDto();
         diaryDTO.setTitle("Controller Unit Test7");
         diaryDTO.setContent("controller test content7..");
         diaryDTO.setMemberId(1);
@@ -92,7 +92,7 @@ public class MyDiaryControllerTest {
      */
     @Test
     public void testUpdateDiary () throws Exception {
-        DiaryDTO diaryDTO = new DiaryDTO();
+        MydiaryDto diaryDTO = new MydiaryDto();
         diaryDTO.setTitle("Controller Unit test");
         diaryDTO.setContent("update test");
         diaryDTO.setMemberId(1);

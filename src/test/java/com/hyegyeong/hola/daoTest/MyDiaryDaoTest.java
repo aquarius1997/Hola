@@ -1,8 +1,8 @@
 package com.hyegyeong.hola.daoTest;
 
-import com.hyegyeong.hola.dao.MyDiaryDAO;
-import com.hyegyeong.hola.dto.DiaryDTO;
 import com.hyegyeong.hola.exception.BusinessException;
+import com.hyegyeong.hola.mydiary.dao.MydiaryDao;
+import com.hyegyeong.hola.mydiary.dto.MydiaryDto;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,7 +17,7 @@ import javax.inject.Inject;
 public class MyDiaryDaoTest {
 
     @Inject
-    private MyDiaryDAO myDiaryDAO;
+    private MydiaryDao myDiaryDAO;
 
     /**
      * 회원이 새로운 여행 다이어리를 작성해 저장한다
@@ -26,10 +26,10 @@ public class MyDiaryDaoTest {
      */
     @Test
     public void testInsertDiary () throws Exception {
-        DiaryDTO diaryDTO = new DiaryDTO();
-        diaryDTO.setTitle("testTitle3");
+        MydiaryDto diaryDTO = new MydiaryDto();
+        diaryDTO.setTitle("구조 재조");
         diaryDTO.setContent("test Content3");
-        diaryDTO.setMemberId(2);
+        diaryDTO.setMemberId(1);
         diaryDTO.setMoodCode("NO");
         diaryDTO.setOpnFlag("Y");
 
@@ -61,9 +61,9 @@ public class MyDiaryDaoTest {
      */
     @Test
     public void testUpdateDiary () throws Exception {
-        DiaryDTO diaryDTO = new DiaryDTO();
-        diaryDTO.setDiaryId(1);
-        diaryDTO.setTitle("updated Title3");
+        MydiaryDto diaryDTO = new MydiaryDto();
+        diaryDTO.setDiaryId(31);
+        diaryDTO.setTitle("구조 수정 후 update Test");
         diaryDTO.setContent("updated Content1");
         diaryDTO.setMoodCode("NA");
         diaryDTO.setOpnFlag("Y");

@@ -53,13 +53,15 @@
 
 **/my-diaries** 하위
 
-| Method | Path | PathVariable | ResponseBody |
-|:---:|:---:|:---:|:---:|
-|POST|/diary|.|.|
-|GET|.|memberId|사용자가 등록한 전체 다이어리 조회|
-|GET|.|memberId, diaryId|사용자의 특정 다이어리 조회|
-|PUT|/diary|.|수정한 다이어리|
-|DELETE|.|diaryId|삭제 결과|
+| Method | Path | Parameter | return | Redirect | Path 예시 |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+|GET|/{memberId}|.|사용자가 등록한 전체 다이어리 View|.|/my-diaries/1|
+|GET|/{memberId}/{diaryId}|.|사용자의 특정 다이어리 View|.|/my-diaries/1/1|
+|GET|/{memberId}/newDiary|.|등록하고자 하는 새로운 다이어리 View|/{memberId}|/my-diaries/1/newDiary|
+|POST|/{memberId}|.|다이어리가 추가 된 이후의 사용자가 등록한 전체 다이어리 View|.|/my-diaries/1|
+|GET|/{memberId}/{diaryId}/detail|.|수정(or 삭제)하고자 하는 다이어리 내용 View|/{memberId}|/my-diaries/1/1/detail|
+|PUT|/{memberId}/{diaryId}|.|수정한 다이어리 ResponseBody|.|/my-diaries/1/1|
+|DELETE|/{memberId}|.|삭제한 다이어리 ResponseBody|.|/my-diaries/1|
 
 
 
