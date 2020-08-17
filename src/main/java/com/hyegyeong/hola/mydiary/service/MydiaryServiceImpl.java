@@ -4,12 +4,14 @@ import com.hyegyeong.hola.exception.BusinessException;
 import com.hyegyeong.hola.exception.ErrorCode;
 import com.hyegyeong.hola.mydiary.dao.MydiaryDao;
 import com.hyegyeong.hola.mydiary.dto.MydiaryDto;
+import com.hyegyeong.hola.upload.dao.ArticleFileDao;
 import lombok.AllArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,16 +21,18 @@ import java.util.List;
 @Slf4j
 public class MydiaryServiceImpl implements MydiaryService {
 
-
     @Setter(onMethod_ = @Autowired)
     private MydiaryDao myDiaryDao;
 
+    @Setter(onMethod_ = @Autowired)
+    private ArticleFileDao articleFileDao;
 
     /**
      * 새로운 다이어리를 추가한다
      * @param diaryDTO 추가하려는 내용을 담고있는 다이어리 객체
      * @throws BusinessException if fail to save Diary, throws exception
      */
+    @Transactional
     @Override
     public void insertDiary (MydiaryDto diaryDTO) throws BusinessException {
         log.info("insertDiary");
@@ -41,6 +45,18 @@ public class MydiaryServiceImpl implements MydiaryService {
         int recordNums = myDiaryDao.insertDiary(diaryDTO);  //insert 영향을 받은 레코드의 수 알아내
         if(recordNums == 0 || recordNums > 1) {   //하나의 게시물만 생성됐는지 확인하고 아닐 경우 예외발생
             new BusinessException(ErrorCode.INSERT_FAIL);
+        }
+
+        //게시글 입력 처리가 끝나면 게시글의 첨부파일을 입력하는 처리를 수행한다
+        String[] files = diaryDTO.getFiles();
+        if(files == null) {
+            return;
+        }
+        try {
+            for(String fileName : files)
+                articleFileDao.addFile(fileName);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

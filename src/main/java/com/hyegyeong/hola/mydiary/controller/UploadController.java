@@ -13,6 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 import java.io.File;
 import java.util.UUID;
 
+/**
+ * 파일업로드 기능을 테스트하기 위한 TEST CONTROLLER
+ */
 @Slf4j
 @AllArgsConstructor
 @RestController

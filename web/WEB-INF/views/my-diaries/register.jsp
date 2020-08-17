@@ -14,6 +14,15 @@
         <div style="height: 300px;">
             <textarea id="register-Detail" placeholder="Input Your Diary Texts"><c:out value="${diary.content}"/></textarea>
         </div>
+        <!-- 첨부파일 영역 -->
+        <div class="fileDrop">
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <p style="text-align: center"><i class="fa fa-paperclip"></i>첨부파일을 드래그 해주세요.</p>
+        </div>
+        <!-- end 첨부파일 영역 -->
         <div class="register-diaryEx">
             <p style="margin-left: 10px">Mood</p>
             <select id="moodCode" class="select-basic">
@@ -49,6 +58,11 @@
 
             if(operation === 'register') {
                 console.log("register clicked");
+
+                //첨부파일 이벤트를 처리한다
+                var that = $(this);
+                filesSubmit(that);
+
                 var formObj = {};
                 formObj["title"] = $("#register-title").val();
                 formObj["content"] = $("#register-Detail").val();
@@ -72,8 +86,33 @@
                 });
             }
         });
-    })
+    });
+
+    $(document).on("click", ".delBtn", function (event) {
+        event.preventDefault();
+        var that = $(this);
+        deleteFileWrtPage(that);
+    });
 </script>
+
+<!-- Handlebars 템플릿을 이용해 HTML 코드를 동적으로 생성-->
+<script id="fileTemplate" type="text/x-handlebars-template">
+    <li>
+        <span class="mailbox-attachment-icon has-img">
+            <img src="{{imgSrc}}" alt="Attachment">
+        </span>
+        <div class="mailbox-attachment-info">
+            <a href="{{originalFileUrl}}" class="mailbox-attachment-name">
+                <i class="fa fa-paperclip"></i> {{originalFileName}}
+            </a>
+            <a href="{{fullName}}" class="btn btn-default btn-xs pull-right delBtn">
+                <i class="fa fa-fw fa-remove"></i>
+            </a>
+        </div>
+    </li>
+</script>
+
+<script type="text/javascript" src="/resources/mydiary/assets/js/article_file_upload.js"></script>
 
 
 

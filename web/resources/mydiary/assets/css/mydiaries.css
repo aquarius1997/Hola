@@ -281,7 +281,14 @@ img { border: 0; }
     margin-bottom: 10px;
 }
 
-
+.fileDrop {
+    margin-top: 2em;
+    margin-left: 10%;
+    width: 80%;
+    /*height: 8em;*/
+    height: 200px;
+    border: 2px dotted #f56a6a;
+}
 
 /*ID선택자 CSS*/
 
@@ -369,16 +376,16 @@ img { border: 0; }
 }
 
 #register-title {
-    margin-left:15%;
+    margin-left:10%;
     margin-top:1.5em;
-    width: 70%;
+    width: 80%;
     height: 2em;
 }
 
 #register-Detail {
-    margin-left:15%;
+    margin-left:10%;
     margin-top:1em;
-    width: 70%;
+    width: 80%;
     height: 100%;
 }
 

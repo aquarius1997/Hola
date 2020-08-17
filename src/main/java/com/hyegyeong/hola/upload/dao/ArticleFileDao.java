@@ -1,4 +1,4 @@
-package com.hyegyeong.hola.upload.Persistence;
+package com.hyegyeong.hola.upload.dao;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Component;

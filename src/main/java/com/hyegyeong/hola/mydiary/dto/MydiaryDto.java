@@ -17,10 +17,10 @@ public class MydiaryDto {
     private Date updDate;   //수정날짜
     private String delFlag;  //삭제여부다
 
-/*    //첨부파일관련
-    private String file;
+    //첨부파일관련
+    private String[] files;
 
-    public void setFiles(String file) {  //게시글 입력/수정시 첨부파일 개수를 업데이트한다
-        this.file = file;
-    }*/
+    public void setFiles(String[] files) {  //게시글 입력/수정시 첨부파일 개수를 업데이트한다
+        this.files = files;
+    }
 }
