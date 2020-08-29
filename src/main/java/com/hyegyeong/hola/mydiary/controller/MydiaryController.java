@@ -6,6 +6,7 @@ import com.hyegyeong.hola.mydiary.service.MydiaryService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 @Slf4j
@@ -19,14 +20,16 @@ public class MydiaryController {
     /**
      * Create New Diary
      * @param diaryDTO DiaryDTO
+     * @oaran multipartHttpServletRequest 첨부파일의 파라미터 값을 받는다
      * @throws BusinessException if fail to save Diary, throws exception
      */
     @PostMapping("/{memberId}")
     @ResponseBody
     public MydiaryDto saveDiary (@PathVariable("memberId") final int memberId,
-                                 @RequestBody MydiaryDto diaryDTO) throws BusinessException{
+                                 @RequestBody MydiaryDto diaryDTO,
+                                 MultipartHttpServletRequest multipartHttpServletRequest) throws BusinessException{
         log.info("saveDiary.. diaryDTO : " + diaryDTO);
-        myDiaryService.insertDiary(diaryDTO);
+        myDiaryService.insertDiary(diaryDTO, multipartHttpServletRequest);
         return diaryDTO;
     }
 

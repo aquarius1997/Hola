@@ -1,10 +1,10 @@
 package com.hyegyeong.hola.mydiary.service;
 
+import com.hyegyeong.hola.commons.util.FileUtils;
 import com.hyegyeong.hola.exception.BusinessException;
 import com.hyegyeong.hola.exception.ErrorCode;
 import com.hyegyeong.hola.mydiary.dao.MydiaryDao;
 import com.hyegyeong.hola.mydiary.dto.MydiaryDto;
-import com.hyegyeong.hola.upload.dao.ArticleFileDao;
 import lombok.AllArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -12,8 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 @AllArgsConstructor
 @Service
@@ -24,17 +27,18 @@ public class MydiaryServiceImpl implements MydiaryService {
     @Setter(onMethod_ = @Autowired)
     private MydiaryDao myDiaryDao;
 
-    @Setter(onMethod_ = @Autowired)
-    private ArticleFileDao articleFileDao;
+    @Resource(name="fileUtils")
+    private FileUtils fileUtils;
 
     /**
      * 새로운 다이어리를 추가한다
      * @param diaryDTO 추가하려는 내용을 담고있는 다이어리 객체
+     * @oaran multipartHttpServletRequest 첨부파일의 파라미터 값을 받는다
      * @throws BusinessException if fail to save Diary, throws exception
      */
     @Transactional
     @Override
-    public void insertDiary (MydiaryDto diaryDTO) throws BusinessException {
+    public void insertDiary (MydiaryDto diaryDTO, MultipartHttpServletRequest multipartHttpServletRequest) throws BusinessException {
         log.info("insertDiary");
         if(diaryDTO.getOpnFlag() == null) {
             diaryDTO.setOpnFlag("Y");
@@ -47,17 +51,19 @@ public class MydiaryServiceImpl implements MydiaryService {
             new BusinessException(ErrorCode.INSERT_FAIL);
         }
 
-        //게시글 입력 처리가 끝나면 게시글의 첨부파일을 입력하는 처리를 수행한다
-        String[] files = diaryDTO.getFiles();
-        if(files == null) {
-            return;
-        }
         try {
-            for(String fileName : files)
-                articleFileDao.addFile(fileName);
+            log.info("첨부파일 추가");
+            List<Map<String, Object>> list = fileUtils.parseInsertFileInfo(diaryDTO, multipartHttpServletRequest);
+
+            int size = list.size();
+            for(int i=0; i<size; i++) {
+                myDiaryDao.insertFile(list.get(i));
+            }
         } catch (Exception e) {
+            log.info("Exception in insertDiary(첨부파일 추가 시 Exception 발생");
             e.printStackTrace();
         }
+
     }
 
     /**

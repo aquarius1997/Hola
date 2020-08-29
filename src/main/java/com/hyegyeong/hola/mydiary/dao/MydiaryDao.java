@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class MydiaryDao {
@@ -22,6 +23,14 @@ public class MydiaryDao {
      */
     public int insertDiary (MydiaryDto diaryDTO) {
         return sqlSession.insert(NAMESPACE + ".insertDiary", diaryDTO);
+    }
+
+    /**
+     * 첨부파일 업로드
+     * @param map 업로드 시킬 첨부파일의 정보를 담고있다
+     */
+    public void insertFile (Map<String, Object> map) {
+        sqlSession.insert(NAMESPACE + ".insertFile", map);
     }
 
     /**

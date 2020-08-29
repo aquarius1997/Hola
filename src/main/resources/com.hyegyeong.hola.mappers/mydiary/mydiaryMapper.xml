@@ -20,51 +20,68 @@
 
 
     <insert id="insertDiary" useGeneratedKeys="true" keyProperty="diaryId">
-    INSERT INTO DIARYS_MST (
-                TITLE
-                ,CONTENT
-                ,MEMBER_ID
-                ,MOOD_CODE
-                ,OPN_FLAG
-                )
-         VALUES (
-                #{title}
-                ,#{content}
-                ,#{memberId}
-                ,#{moodCode}
-                ,#{opnFlag}
-         )
+        INSERT INTO DIARYS_MST (
+                    TITLE
+                    ,CONTENT
+                    ,MEMBER_ID
+                    ,MOOD_CODE
+                    ,OPN_FLAG
+                    )
+             VALUES (
+                    #{title}
+                    ,#{content}
+                    ,#{memberId}
+                    ,#{moodCode}
+                    ,#{opnFlag}
+                    )
+    </insert>
+
+    <insert id="insertFile" useGeneratedKeys="true" parameterType="hashMap">
+        INSERT INTO DIARY_ATTACHS (
+                    DIARY_ID
+                    ,MEMBER_ID
+                    ,ORIG_NAME
+                    ,FILE_NAME
+                    ,FILE_SIZE
+                    )
+             VALUES (
+                    #{DIARY_ID}
+                    ,#{MEMBER_ID}
+                    ,#{ORIG_NAME}
+                    ,#{FILE_NAME}
+                    ,#{FILE_SIZE}
+                    )
     </insert>
 
     <select id="selectDiaryList" resultMap="diaryResult">
-    SELECT *
-      FROM DIARYS_MST
-     WHERE MEMBER_ID = #{memberId}
-       AND DEL_FLAG = 'N'
+        SELECT *
+          FROM DIARYS_MST
+         WHERE MEMBER_ID = #{memberId}
+           AND DEL_FLAG = 'N'
     </select>
 
     <select id="selectDiary" resultMap="diaryResult">
-    SELECT *
-      FROM DIARYS_MST
-     WHERE DIARY_ID = #{diaryId}
-       AND DEL_FLAG = 'N'
+        SELECT *
+          FROM DIARYS_MST
+         WHERE DIARY_ID = #{diaryId}
+           AND DEL_FLAG = 'N'
     </select>
 
     <update id="updateDiary">
-    UPDATE DIARYS_MST
-       SET TITLE = #{title}
-           ,CONTENT = #{content}
-           ,MOOD_CODE = #{moodCode}
-           ,OPN_FLAG = #{opnFlag}
-     WHERE DIARY_ID = #{diaryId}
-       AND MEMBER_ID = #{memberId}
-       AND DEL_FLAG = 'N'
+        UPDATE DIARYS_MST
+           SET TITLE = #{title}
+               ,CONTENT = #{content}
+               ,MOOD_CODE = #{moodCode}
+               ,OPN_FLAG = #{opnFlag}
+         WHERE DIARY_ID = #{diaryId}
+           AND MEMBER_ID = #{memberId}
+           AND DEL_FLAG = 'N'
     </update>
 
     <delete id="deleteDiary">
-    UPDATE DIARYS_MST
-       SET DEL_FLAG = 'Y'
-     WHERE DIARY_ID = #{diaryId}
+        UPDATE DIARYS_MST
+           SET DEL_FLAG = 'Y'
+         WHERE DIARY_ID = #{diaryId}
     </delete>
 
 </mapper>

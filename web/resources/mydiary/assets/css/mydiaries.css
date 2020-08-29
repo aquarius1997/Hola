@@ -281,14 +281,7 @@ img { border: 0; }
     margin-bottom: 10px;
 }
 
-.fileDrop {
-    margin-top: 2em;
-    margin-left: 10%;
-    width: 80%;
-    /*height: 8em;*/
-    height: 200px;
-    border: 2px dotted #f56a6a;
-}
+
 
 /*ID선택자 CSS*/
 

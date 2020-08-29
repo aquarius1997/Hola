@@ -10,15 +10,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
-    <!-- lightbox js-->
-    <sciprt src="/resources/mydiary/assets/lightbox/src/js/lightbox.js"></sciprt>
 
     <!--Font-->
     <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
     <!--CSS-->
     <link rel="stylesheet" href="/resources/mydiary/assets/css/mydiaries.css?ver=4" />
-    <!-- lightbox css-->
-    <link rel="stylesheet" href="/resources/mydiary/assets/lightbox/src/css/lightbox.css">
 
 </head>
 <body>

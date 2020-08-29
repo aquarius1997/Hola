@@ -2,6 +2,7 @@ package com.hyegyeong.hola.mydiary.service;
 
 import com.hyegyeong.hola.exception.BusinessException;
 import com.hyegyeong.hola.mydiary.dto.MydiaryDto;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.util.List;
 
@@ -12,9 +13,10 @@ public interface MydiaryService {
     /**
      * 새로운 다이어리를 추가한다
      * @param mydiaryDTO 추가하려는 내용을 담고있는 다이어리 객체
+     * @oaran multipartHttpServletRequest 첨부파일의 파라미터 값을 받는다
      * @throws BusinessException if fail to save Diary, throws exception
      */
-    public void insertDiary (MydiaryDto mydiaryDTO) throws BusinessException;
+    public void insertDiary (MydiaryDto mydiaryDTO, MultipartHttpServletRequest multipartHttpServletRequest) throws BusinessException;
 
     /**
      * 특정 회원이 작성한 모든 다이어리 객체를 가져온다
