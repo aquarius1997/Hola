@@ -26,14 +26,6 @@ public class MydiaryDao {
     }
 
     /**
-     * 첨부파일 업로드
-     * @param map 업로드 시킬 첨부파일의 정보를 담고있다
-     */
-    public void insertFile (Map<String, Object> map) {
-        sqlSession.insert(NAMESPACE + ".insertFile", map);
-    }
-
-    /**
      * 특정 회원이 작성한 모든 다이어리 객체를 가져온다
      * @param memberId 회원 아이
      * @return 특정 회원이 작성한 모든 다이어리 객체

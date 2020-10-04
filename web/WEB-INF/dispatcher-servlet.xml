@@ -28,10 +28,4 @@
     <!-- This tag allows for mapping the DispatcherServlet to "/" -->
     <mvc:default-servlet-handler />
 
-    <!-- 파일 업로드 multipartReselver객체, 파일 최대 크기는 10MB 정도로 제한-->
-    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <property name="maxUploadSize" value="10485760" />
-        <property name="maxInMemorySize" value="10485760" />
-    </bean>
-
 </beans>

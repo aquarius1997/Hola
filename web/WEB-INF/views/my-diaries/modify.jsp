@@ -60,59 +60,49 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-
-       $('button').on("click", function(e) {
-           e.preventDefault();
-
-           var operation = $(this).data("oper");
-
-
-           if(operation === 'remove') {
-               console.log("remove clicked");
-
-               var formObj = {};
-               formObj["memberId"] = <c:out value="${memberId}"/>
-                   formObj["diaryId"] = <c:out value="${diary.diaryId}"/>
-
-                       console.log(formObj);
-
-               $.ajax({
-                   type:"delete",
-                   url:"/my-diaries/<c:out value="${memberId}"/>",
-                   contentType: "application/json; charset=UTF-8",
-                   dataType: "json",
-                   data:JSON.stringify(formObj),
-                   success : function() {
-                       console.log("SUCCESS");
-                       window.location.href = "/my-diaries/<c:out value="${memberId}"/>";
-                   }
-               });
-           } else if (operation === 'modify') {
+        $('button').on("click", function(e) {
+            e.preventDefault();
+            var operation = $(this).data("oper");
+            if(operation === 'remove') {
+                console.log("remove clicked");
+                var formObj = {};
+                formObj["memberId"] = <c:out value="${memberId}"/>
+                    formObj["diaryId"] = <c:out value="${diary.diaryId}"/>
+                        console.log(formObj);
+                $.ajax({
+                    type:"delete",
+                    url:"/my-diaries/<c:out value="${memberId}"/>",
+                    contentType: "application/json; charset=UTF-8",
+                    dataType: "json",
+                    data:JSON.stringify(formObj),
+                    success : function() {
+                        console.log("SUCCESS");
+                        window.location.href = "/my-diaries/<c:out value="${memberId}"/>";
+                    }
+                });
+            } else if (operation === 'modify') {
                 console.log("modify clicked");
-
                 var formObj = {};
                 formObj["title"] = $("#input-title").val();
                 formObj["content"] = $("#input-content").val();
                 formObj["moodCode"] = $("#moodCode").val();
                 formObj["opnFlag"] = $("#opnFlag").val();
                 formObj["memberId"] = <c:out value="${memberId}"/>
-                formObj["diaryId"] = <c:out value="${diary.diaryId}"/>
-
-                console.log(formObj);
-
-               $.ajax({
+                    formObj["diaryId"] = <c:out value="${diary.diaryId}"/>
+                        console.log(formObj);
+                $.ajax({
                     type:"put",
                     url:"/my-diaries/diary",
                     contentType: "application/json; charset=UTF-8",
                     dataType: "json",
                     data:JSON.stringify(formObj),
-                   success : function() {
-                       console.log("SUCCESS");
-                       window.location.href = "/my-diaries/<c:out value="${memberId}"/>/<c:out value="${diary.diaryId}"/>";
-                   }
+                    success : function() {
+                        console.log("SUCCESS");
+                        window.location.href = "/my-diaries/<c:out value="${memberId}"/>/<c:out value="${diary.diaryId}"/>";
+                    }
                 });
-           }
-       });
+            }
+        });
     });
 </script>
 

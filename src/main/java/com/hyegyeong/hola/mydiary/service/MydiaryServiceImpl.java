@@ -1,6 +1,5 @@
 package com.hyegyeong.hola.mydiary.service;
 
-import com.hyegyeong.hola.commons.util.FileUtils;
 import com.hyegyeong.hola.exception.BusinessException;
 import com.hyegyeong.hola.exception.ErrorCode;
 import com.hyegyeong.hola.mydiary.dao.MydiaryDao;
@@ -12,11 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Map;
 
 @AllArgsConstructor
 @Service
@@ -27,9 +24,6 @@ public class MydiaryServiceImpl implements MydiaryService {
     @Setter(onMethod_ = @Autowired)
     private MydiaryDao myDiaryDao;
 
-    @Resource(name="fileUtils")
-    private FileUtils fileUtils;
-
     /**
      * 새로운 다이어리를 추가한다
      * @param diaryDTO 추가하려는 내용을 담고있는 다이어리 객체
@@ -38,7 +32,7 @@ public class MydiaryServiceImpl implements MydiaryService {
      */
     @Transactional
     @Override
-    public void insertDiary (MydiaryDto diaryDTO, MultipartHttpServletRequest multipartHttpServletRequest) throws BusinessException {
+    public void insertDiary (MydiaryDto diaryDTO) throws BusinessException {
         log.info("insertDiary");
         if(diaryDTO.getOpnFlag() == null) {
             diaryDTO.setOpnFlag("Y");
@@ -50,20 +44,6 @@ public class MydiaryServiceImpl implements MydiaryService {
         if(recordNums == 0 || recordNums > 1) {   //하나의 게시물만 생성됐는지 확인하고 아닐 경우 예외발생
             new BusinessException(ErrorCode.INSERT_FAIL);
         }
-
-        try {
-            log.info("첨부파일 추가");
-            List<Map<String, Object>> list = fileUtils.parseInsertFileInfo(diaryDTO, multipartHttpServletRequest);
-
-            int size = list.size();
-            for(int i=0; i<size; i++) {
-                myDiaryDao.insertFile(list.get(i));
-            }
-        } catch (Exception e) {
-            log.info("Exception in insertDiary(첨부파일 추가 시 Exception 발생");
-            e.printStackTrace();
-        }
-
     }
 
     /**

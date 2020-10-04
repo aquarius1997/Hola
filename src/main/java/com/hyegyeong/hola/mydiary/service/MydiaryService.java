@@ -16,7 +16,7 @@ public interface MydiaryService {
      * @oaran multipartHttpServletRequest 첨부파일의 파라미터 값을 받는다
      * @throws BusinessException if fail to save Diary, throws exception
      */
-    public void insertDiary (MydiaryDto mydiaryDTO, MultipartHttpServletRequest multipartHttpServletRequest) throws BusinessException;
+    public void insertDiary (MydiaryDto mydiaryDTO) throws BusinessException;
 
     /**
      * 특정 회원이 작성한 모든 다이어리 객체를 가져온다

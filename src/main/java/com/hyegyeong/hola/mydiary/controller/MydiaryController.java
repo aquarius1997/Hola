@@ -26,10 +26,9 @@ public class MydiaryController {
     @PostMapping("/{memberId}")
     @ResponseBody
     public MydiaryDto saveDiary (@PathVariable("memberId") final int memberId,
-                                 @RequestBody MydiaryDto diaryDTO,
-                                 MultipartHttpServletRequest multipartHttpServletRequest) throws BusinessException{
+                                 @RequestBody MydiaryDto diaryDTO) throws BusinessException{
         log.info("saveDiary.. diaryDTO : " + diaryDTO);
-        myDiaryService.insertDiary(diaryDTO, multipartHttpServletRequest);
+        myDiaryService.insertDiary(diaryDTO);
         return diaryDTO;
     }
 

@@ -61,10 +61,6 @@
 
                 console.log(formObj);
 
-                var formFile = {};
-                formFile["file"] = $("#attach-file").val();
-                console.log(formFile);
-
                 $.ajax({
                     type:"post",
                     url:"/my-diaries/<c:out value="${memberId}"/>",
